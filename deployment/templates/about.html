@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block content %}
+<section class="about_section ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src="/static/images/img2.jpg" alt="" class="img-fluid">
+        </div>
+      </div>
+      <div class="col-md-5"> <!-- Adjusted column size -->
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2 style="margin-top: 30x;">
+              About Project
+            </h2>
+          </div>
+          <p style="text-align: justify;">
+            This study conducts a comparative analysis of traditional machine learning  for intrusion detection in self-organizing networks. The methodologies evaluated include Random Forest, Decision Tree,K-Best feature selection, and K-Means clustering. The backend implementation utilizes Python, while the frontend is developed with HTML, CSS, and JavaScript. K-Best feature selection and K-Means clustering are employed to enhance data preprocessing and clustering efficiency. 
+                       
+          </p>
+          <div>
+            <a href="https://www.bing.com/ck/a?!&&p=dc5ca6a9e9021f1081834bd03d13c9e6c6b8a0dd498483d7f37ee29f5c3840ccJmltdHM9MTczNTE3MTIwMA&ptn=3&ver=2&hsh=4&fclid=083e9b8f-7d02-6439-2a65-8eb07ca4653c&psq=intrusion+detection+system+wikipedia&u=a1aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSW50cnVzaW9uX2RldGVjdGlvbl9zeXN0ZW0&ntb=1" class="btn btn-primary"> <!-- Added Bootstrap button class -->
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

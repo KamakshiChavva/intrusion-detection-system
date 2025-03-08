@@ -1,0 +1,120 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="hero_area2" style="padding-top: 5px;">
+    <div class="booking1 p-5" style="padding-bottom: 200px;">
+
+        <h2 style="text-align: center; color: #cfdeec; margin-top: -10px; padding-bottom: 20px;">
+            Prediction</h2>
+
+        {% if result %}
+        <h2 style="color: #000000; text-align: center; padding-bottom: 30px;font-weight: bold;">New Prediction: <span style="color: #cfdeec;">{{ result }}</span> </h2>
+        {% endif %}
+
+        <form action="{{ url_for('prediction') }}" method="post"
+            style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;margin-top: 10px;">
+
+            <!-- Updated fields according to selected top 10 features -->
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="service" style="font-weight: bold; color: #000000;">Service:</label>
+                <select id="service" name="service"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;" required>
+                    <option value="0">http</option>
+                    <option value="1">private</option>
+                    <option value="2">domain_u</option>
+                    <option value="3">smtp</option>
+                    <option value="4">ftp_data</option>
+                    <option value="5">Other</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="flag" style="font-weight: bold; color: #000000;">Flag:</label>
+                <select id="flag" name="flag"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;" required>
+                    <option value="0">SF</option>
+                    <option value="1">S0</option>
+                    <option value="2">REJ</option>
+                    <option value="3">RSTR</option>
+                    <option value="4">RSTO</option>
+                    <option value="5">Other</option>
+                </select>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="src_bytes" style="font-weight: bold; color: #000000;">Source Bytes:</label>
+                <input type="number" id="src_bytes" name="src_bytes" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="dst_bytes" style="font-weight: bold; color: #000000;">Destination Bytes:</label>
+                <input type="number" id="dst_bytes" name="dst_bytes" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="count" style="font-weight: bold; color: #000000;">Count:</label>
+                <input type="number" id="count" name="count" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="diff_srv_rate" style="font-weight: bold; color: #000000;">Different Service Rate:</label>
+                <input type="number" id="diff_srv_rate" name="diff_srv_rate" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="dst_host_srv_count" style="font-weight: bold; color: #000000;">Destination Host Service Count:</label>
+                <input type="number" id="dst_host_srv_count" name="dst_host_srv_count" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="dst_host_same_srv_rate" style="font-weight: bold; color: #000000;">Destination Host Same Service Rate:</label>
+                <input type="number" id="dst_host_same_srv_rate" name="dst_host_same_srv_rate" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="dst_host_diff_srv_rate" style="font-weight: bold; color: #000000;">Destination Host Different Service Rate:</label>
+                <input type="number" id="dst_host_diff_srv_rate" name="dst_host_diff_srv_rate" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+
+            <!--<div style="flex: 1 1 30%; margin-bottom: 3px;">
+                <label for="dst_host_same_src_port_rate" style="font-weight: bold; color: #000000;">Destination Host Same Source Port Rate:</label>
+                <input type="number" id="dst_host_same_src_port_rate" name="dst_host_same_src_port_rate" step="any"
+                    style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div> -->
+
+            <div style="flex: 1 1 100%; margin-bottom: 3px; display: flex; flex-direction: column; align-items: flex-start;">
+                <label for="dst_host_same_src_port_rate" style="font-weight: bold; color: #000000; margin-bottom: 5px;">
+                    Destination Host Same Source Port Rate:
+                </label>
+                <input type="number" id="dst_host_same_src_port_rate" name="dst_host_same_src_port_rate" step="any"
+                    style="width: 32%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                    required>
+            </div>
+            
+
+            <!-- Submit Button -->
+            <div style="width: 100%; text-align: center; margin-top: 0px; padding-bottom: 0px;">
+                <button type="submit"
+                    style="width: 10%; padding: 8px; font-size: 16px; color: rgb(0, 0, 0); font-weight: bold; background-color: #ffffffdc; border: none; border-radius: 10px; cursor: pointer;">
+                    Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
